@@ -1,5 +1,6 @@
 package com.pharmacy.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,9 @@ public class PharmacyService {
 	
 	public Optional<Pharmacy> getPharmacy(Long id) {
 	   return pharmacyRepo.findById(id);
+	}
+	
+	public List<Pharmacy> getAllPharmacy() {
+		return pharmacyRepo.findAll();
 	}
 }

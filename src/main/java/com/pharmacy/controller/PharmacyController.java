@@ -1,5 +1,6 @@
 package com.pharmacy.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class PharmacyController {
 	public void save(@RequestBody Pharmacy pharmacy) {
 		pharmacyService.save(pharmacy);
 		
+	}
+	
+	@GetMapping("/pharmacy")
+	public List<Pharmacy> getAll() {
+		return pharmacyService.getAllPharmacy();
 	}
 	
 	@GetMapping("/pharmacy/{id}")

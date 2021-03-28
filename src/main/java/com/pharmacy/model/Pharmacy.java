@@ -1,5 +1,6 @@
 package com.pharmacy.model;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
@@ -10,6 +11,10 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.pharmacy.util.SqlTimeDeserializer;
 
 @Entity
 @Table(name ="inst_pharmacy")
@@ -24,9 +29,13 @@ public class Pharmacy {
 	private String addressLine1;
 	private String dayOfWeek;
 
-	private Timestamp startTime;
+	@JsonFormat(pattern = "HH:mm")
+	@JsonDeserialize(using = SqlTimeDeserializer.class)
+	private Time startTime;
 
-	private Timestamp endTime;
+	@JsonFormat(pattern = "HH:mm")
+	@JsonDeserialize(using = SqlTimeDeserializer.class)
+	private Time endTime;
 
 	@CreationTimestamp
 	private Timestamp createdOn;
@@ -64,16 +73,16 @@ public class Pharmacy {
 	public void setDayOfWeek(String dayOfWeek) {
 		this.dayOfWeek = dayOfWeek;
 	}
-	public Timestamp getStartTime() {
+	public Time getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Timestamp startTime) {
+	public void setStartTime(Time startTime) {
 		this.startTime = startTime;
 	}
-	public Timestamp getEndTime() {
+	public Time getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Timestamp endTime) {
+	public void setEndTime(Time endTime) {
 		this.endTime = endTime;
 	}
 	public Timestamp getCreatedOn() {
@@ -89,7 +98,7 @@ public class Pharmacy {
 		this.updatedOn = updatedOn;
 	}
 	public Pharmacy(Long id, Long institutionId, String pharmacyName, String addressLine1, String dayOfWeek,
-			Timestamp startTime, Timestamp endTime, Timestamp createdOn, Timestamp updatedOn) {
+			Time startTime, Time endTime, Timestamp createdOn, Timestamp updatedOn) {
 		super();
 		this.id = id;
 		this.institutionId = institutionId;
